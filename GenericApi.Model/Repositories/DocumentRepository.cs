@@ -16,6 +16,7 @@ namespace GenericApi.Model.Repositories
     {
         public DocumentRepository(WorkShopContext context) : base(context)
         {
+
         }
     }
 }

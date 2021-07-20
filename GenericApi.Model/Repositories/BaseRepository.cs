@@ -28,18 +28,18 @@ namespace GenericApi.Model.Repositories
             _context = context;
             _set = context.Set<T>();
         }
-        public IQueryable<T> Query()
+        public virtual IQueryable<T> Query()
         {
             return _set.AsQueryable();
         }
-        public async Task<T> Add(T entity)
+        public virtual async Task<T> Add(T entity)
         {
             var result = await _set.AddAsync(entity);
             await _context.SaveChangesAsync();
 
             return result.Entity;
         }
-        public async Task<T> Delete(int id)
+        public virtual async Task<T> Delete(int id)
         {
             var entity = await Get(id);
 
@@ -48,12 +48,12 @@ namespace GenericApi.Model.Repositories
 
             return result.Entity;
         }
-        public async Task<T> Get(int id)
+        public virtual async Task<T> Get(int id)
         {
             var entity = await _set.Where(x=> x.Id == id).FirstOrDefaultAsync();
             return entity;
         }
-        public async Task<T> Update(T entity)
+        public virtual async Task<T> Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
