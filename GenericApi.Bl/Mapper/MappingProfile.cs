@@ -21,13 +21,9 @@ namespace GenericApi.Bl.Mapper
 
             CreateMap<WorkShop, WorkShopDto>().ReverseMap();
 
-            CreateMap<WorkShopMember, WorkShopMemberDto>()
-                .ForMember(dto => dto.WorkShopId, config => config.MapFrom(entity => entity.WorkShopId));
-            CreateMap<WorkShopMemberDto, WorkShopMember>();
+            CreateMap<WorkShopMember, WorkShopMemberDto>().ReverseMap();
 
-            CreateMap<WorkShopDay, WorkShopDayDto>()
-                .ForMember(dto => dto.WorkShopId, config => config.MapFrom(entity => entity.WorkShopId));
-            CreateMap<WorkShopDayDto, WorkShopDay>();
+            CreateMap<WorkShopDay, WorkShopDayDto>().ReverseMap();
         }
     }
 }
