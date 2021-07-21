@@ -14,7 +14,5 @@ namespace GenericApi.Bl.Dto
         public WorkShopMemberRole Role { get; set; }
         public int WorkShopId { get; set; }
         public int MemberId { get; set; }
-        public virtual WorkShop WorkShop { get; set; }
-        public virtual Member Member { get; set; }
     }
 }

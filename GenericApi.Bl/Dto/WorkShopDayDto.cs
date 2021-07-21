@@ -18,6 +18,5 @@ namespace GenericApi.Bl.Dto
         public TimeSpan? EndHour { get; set; }
 
         public int WorkShopId { get; set; }
-        public virtual WorkShop WorkShop { get; set; }
     }
 }
