@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace GenericApi.Bl.Mapper
 {
-    public class MainProfile : Profile
+    public class MappingProfile : Profile
     {
-        public MainProfile()
+        public MappingProfile()
         {
             CreateMap<Document, DocumentDto>().ReverseMap();
 
@@ -20,8 +20,8 @@ namespace GenericApi.Bl.Mapper
 
             CreateMap<MemberDto, Member>();
             CreateMap<WorkShop, WorkShopDto>().ReverseMap();
-            CreateMap<WorkShopMember, WorkShopMemberDto>();
-            CreateMap<WorkShopDay, WorkShopDayDto>();
+            CreateMap<WorkShopMember, WorkShopMemberDto>().ReverseMap();
+            CreateMap<WorkShopDay, WorkShopDayDto>().ReverseMap();
         }
     }
 }

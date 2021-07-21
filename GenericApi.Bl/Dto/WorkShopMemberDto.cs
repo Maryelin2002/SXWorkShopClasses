@@ -1,4 +1,5 @@
-﻿using GenericApi.Core.Enums;
+﻿using GenericApi.Core.BaseModel;
+using GenericApi.Core.Enums;
 using GenericApi.Model.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GenericApi.Bl.Dto
 {
-    public class WorkShopMemberDto
+    public class WorkShopMemberDto : BaseEntityDto
     {
         public WorkShopMemberRole Role { get; set; }
         public int WorkShopId { get; set; }
