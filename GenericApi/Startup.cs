@@ -1,5 +1,8 @@
+using GenericApi.Bl.IoC;
+using GenericApi.Config;
 using GenericApi.Model.Contexts;
 using GenericApi.Model.IoC;
+using GenericApi.Services.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,10 +34,23 @@ namespace GenericApi
             services.AddDbContext<WorkShopContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddModelRegistry();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddControllers();
+            services.AddControllers().AddValidation();
+
+            #region Registries
+
+            services.AddBlRegistry();
+            services.AddServiceRegistry();
+            services.AddModelRegistry();
+
+            #endregion
+
+            #region External Libraries
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddSwagger();
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +60,8 @@ namespace GenericApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAppSwagger();
 
             app.UseHttpsRedirection();
 
