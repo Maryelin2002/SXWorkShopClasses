@@ -39,7 +39,7 @@ namespace GenericApi.Config
 
         public static IApplicationBuilder UseAppSwagger(this IApplicationBuilder app)
         {
-            app.UseAppSwagger();
+            app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "WorkShop API V1");

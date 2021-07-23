@@ -2,7 +2,6 @@
 using GenericApi.Model.Entities;
 using GenericApi.Services.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +12,9 @@ namespace GenericApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DocumentController : BaseController<Document, DocumentDto>
+    public class WorkShopMemberController : BaseController<WorkShopMember, WorkShopMemberDto>
     {
-        public DocumentController(IDocumentService service) : base(service)
+        public WorkShopMemberController(IWorkShopMemberService service) : base(service)
         {
 
         }
