@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <Compile Include="Validations\DocumentValidator.cs" />
-    <Compile Include="Validations\MemberValidator.cs" />
+    <Compile Include="Validations\UserValidator.cs" />
     <Compile Include="Validations\WorkShopDayValidator.cs" />
     <Compile Include="Validations\WorkShopMemberValidator.cs" />
     <Compile Include="Validations\WorkShopValidator.cs" />

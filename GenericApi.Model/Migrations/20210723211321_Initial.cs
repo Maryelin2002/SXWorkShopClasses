@@ -54,7 +54,7 @@ namespace GenericApi.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Members",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -70,17 +70,19 @@ namespace GenericApi.Model.Migrations
                     MiddleName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     SecondLastName = table.Column<string>(nullable: true),
-                    DocumentType = table.Column<int>(nullable: false),
-                    DocumentTypeValue = table.Column<string>(nullable: true),
                     Gender = table.Column<int>(nullable: false),
                     Dob = table.Column<DateTime>(nullable: true),
-                    PhotoId = table.Column<int>(nullable: true)
+                    DocumentType = table.Column<int>(nullable: false),
+                    DocumentTypeValue = table.Column<string>(nullable: true),
+                    PhotoId = table.Column<int>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Members", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Members_Documents_PhotoId",
+                        name: "FK_Users_Documents_PhotoId",
                         column: x => x.PhotoId,
                         principalTable: "Documents",
                         principalColumn: "Id",
@@ -133,15 +135,15 @@ namespace GenericApi.Model.Migrations
                     UpdatedBy = table.Column<string>(nullable: true),
                     Role = table.Column<int>(nullable: false),
                     WorkShopId = table.Column<int>(nullable: false),
-                    MemberId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkShopMembers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkShopMembers_Members_MemberId",
-                        column: x => x.MemberId,
-                        principalTable: "Members",
+                        name: "FK_WorkShopMembers_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -153,8 +155,8 @@ namespace GenericApi.Model.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Members_PhotoId",
-                table: "Members",
+                name: "IX_Users_PhotoId",
+                table: "Users",
                 column: "PhotoId");
 
             migrationBuilder.CreateIndex(
@@ -163,9 +165,9 @@ namespace GenericApi.Model.Migrations
                 column: "WorkShopId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkShopMembers_MemberId",
+                name: "IX_WorkShopMembers_UserId",
                 table: "WorkShopMembers",
-                column: "MemberId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkShopMembers_WorkShopId",
@@ -182,7 +184,7 @@ namespace GenericApi.Model.Migrations
                 name: "WorkShopMembers");
 
             migrationBuilder.DropTable(
-                name: "Members");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "WorkShops");

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GenericApi.Model.Migrations
 {
     [DbContext(typeof(WorkShopContext))]
-    [Migration("20210722140311_Initial")]
+    [Migration("20210723211321_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,7 +63,7 @@ namespace GenericApi.Model.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("GenericApi.Model.Entities.Member", b =>
+            modelBuilder.Entity("GenericApi.Model.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,6 +106,9 @@ namespace GenericApi.Model.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("PhotoId")
                         .HasColumnType("int");
 
@@ -118,11 +121,14 @@ namespace GenericApi.Model.Migrations
                     b.Property<DateTimeOffset?>("UpdatedDate")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PhotoId");
 
-                    b.ToTable("Members");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("GenericApi.Model.Entities.WorkShop", b =>
@@ -248,9 +254,6 @@ namespace GenericApi.Model.Migrations
                     b.Property<DateTimeOffset?>("DeletedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Role")
                         .HasColumnType("int");
 
@@ -260,19 +263,22 @@ namespace GenericApi.Model.Migrations
                     b.Property<DateTimeOffset?>("UpdatedDate")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("WorkShopId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MemberId");
+                    b.HasIndex("UserId");
 
                     b.HasIndex("WorkShopId");
 
                     b.ToTable("WorkShopMembers");
                 });
 
-            modelBuilder.Entity("GenericApi.Model.Entities.Member", b =>
+            modelBuilder.Entity("GenericApi.Model.Entities.User", b =>
                 {
                     b.HasOne("GenericApi.Model.Entities.Document", "Photo")
                         .WithMany()
@@ -290,9 +296,9 @@ namespace GenericApi.Model.Migrations
 
             modelBuilder.Entity("GenericApi.Model.Entities.WorkShopMember", b =>
                 {
-                    b.HasOne("GenericApi.Model.Entities.Member", "Member")
-                        .WithMany("WorkShops")
-                        .HasForeignKey("MemberId")
+                    b.HasOne("GenericApi.Model.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

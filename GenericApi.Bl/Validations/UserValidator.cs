@@ -3,9 +3,9 @@ using GenericApi.Bl.Dto;
 
 namespace GenericApi.Bl.Validations
 {
-    public class MemberValidator : AbstractValidator<UserDto>
+    public class UserValidator : AbstractValidator<UserDto>
     {
-        public MemberValidator()
+        public UserValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
