@@ -1,8 +1,6 @@
 ﻿using GenericApi.Core.BaseModel;
 using GenericApi.Core.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GenericApi.Model.Entities
 {

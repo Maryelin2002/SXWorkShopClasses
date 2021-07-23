@@ -1,7 +1,6 @@
 ﻿using GenericApi.Core.BaseModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GenericApi.Model.Entities
 {

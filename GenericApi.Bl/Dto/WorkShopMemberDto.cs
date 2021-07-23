@@ -1,11 +1,6 @@
 ﻿using GenericApi.Core.BaseModel;
 using GenericApi.Core.Enums;
 using GenericApi.Model.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenericApi.Bl.Dto
 {
@@ -13,6 +8,8 @@ namespace GenericApi.Bl.Dto
     {
         public WorkShopMemberRole Role { get; set; }
         public int WorkShopId { get; set; }
-        public int MemberId { get; set; }
+        public virtual WorkShop WorkShop { get; set; }
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

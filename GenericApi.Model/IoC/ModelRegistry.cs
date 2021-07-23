@@ -1,9 +1,5 @@
-﻿using GenericApi.Model.Contexts;
-using GenericApi.Model.Repositories;
+﻿using GenericApi.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GenericApi.Model.IoC
 {
@@ -15,7 +11,7 @@ namespace GenericApi.Model.IoC
             services.AddScoped<IWorkShopRepository,WorkShopRepository>();
             services.AddScoped<IWorkShopMemberRepository,WorkShopMemberRepository>();
             services.AddScoped<IWorkShopDayRepository,WorkShopDayRepository>();
-            services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
     }
 }

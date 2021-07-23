@@ -1,8 +1,5 @@
 ﻿using GenericApi.Model.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GenericApi.Model.Contexts
 {
@@ -13,7 +10,7 @@ namespace GenericApi.Model.Contexts
         }
         public DbSet<Document> Documents { get; set; }
         public DbSet<WorkShop> WorkShops { get; set; }
-        public DbSet<Member> Members { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<WorkShopMember> WorkShopMembers { get; set; }
         public DbSet<WorkShopDay> WorkShopDays { get; set; }
 

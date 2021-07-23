@@ -1,11 +1,8 @@
 ﻿using GenericApi.Core.BaseModel;
 using GenericApi.Model.Extensions;
-using GenericApi.Model.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -38,13 +35,13 @@ namespace GenericApi.Model.Contexts
                         }
 
                         entry.Entity.Deleted = false;
-                        entry.Entity.CreatedDate = DateTimeOffset.Now;
+                        entry.Entity.CreatedDate = DateTimeOffset.UtcNow;
                         break;
 
                     case EntityState.Modified:
                         entry.Property(x => x.CreatedDate).IsModified = false;
                         entry.Property(x => x.CreatedBy).IsModified = false;
-                        entry.Entity.UpdatedDate = DateTimeOffset.Now;
+                        entry.Entity.UpdatedDate = DateTimeOffset.UtcNow;
                         break;
 
                     case EntityState.Deleted:
@@ -52,7 +49,7 @@ namespace GenericApi.Model.Contexts
                         entry.Property(x => x.CreatedBy).IsModified = false;
                         entry.State = EntityState.Modified;
                         entry.Entity.Deleted = true;
-                        entry.Entity.DeletedDate = DateTimeOffset.Now;
+                        entry.Entity.DeletedDate = DateTimeOffset.UtcNow;
                         break;
 
                     default:
@@ -60,7 +57,6 @@ namespace GenericApi.Model.Contexts
                 }
             }
         }
-
         public override int SaveChanges()
         {
             SetAuditEntities();

@@ -1,21 +1,12 @@
-using GenericApi.Bl.IoC;
+using GenericApi.Bl.Config;
 using GenericApi.Config;
-using GenericApi.Model.Contexts;
 using GenericApi.Model.IoC;
 using GenericApi.Services.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GenericApi
 {
@@ -31,23 +22,26 @@ namespace GenericApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<WorkShopContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            #region External Dependencies Configs
 
+            services.ConfigSqlServerDbContext(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddControllers(options => options.EnableEndpointRouting = false)
+                .ConfigFluentValidation();
+            services.ConfigAutoMapper();
+            services.AddAppOData();
+            services.ConfigSerilog();
 
-            services.AddControllers().AddValidation();
+            #endregion
 
-            #region Registries
+            #region App Registries
 
-            services.AddBlRegistry();
             services.AddServiceRegistry();
             services.AddModelRegistry();
 
             #endregion
 
-            #region External Libraries
+            #region Api Libraries
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddSwagger();
 
             #endregion
@@ -69,10 +63,7 @@ namespace GenericApi
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseMvc(routeBuilder => routeBuilder.UseAppOData());
         }
     }
 }
